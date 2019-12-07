@@ -52,7 +52,7 @@
                             {{item.title}}
                         </td>
 
-                        <img class="smallImage" [src]="item.image" alt="item.title">
+                        <img (click)="ShowImg(item)" class="smallImage" [src]="item.image" alt="item.title">
                         <td>
                             <button class="btn btn-info mr-1" data-toggle="modal" (click)="EditAds(item)"
                                 data-target="#myModal1"><i class="fa fa-cog"></i></button>

@@ -1,0 +1,16 @@
+<div class="chart1 pb-5">
+    <h2 class="mt-1  mb-3">Top Selling Product</h2>
+    <div class="chart-wrapper custom">
+        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+            [plugins]="barChartPlugins" [colors]="barChartColors" [legend]="barChartLegend" [chartType]="barChartType">
+        </canvas>
+    </div>
+</div>
+<div class="chart2 mt-5">
+    <h2 class="mt-5  mb-3">Top Customer</h2>
+    <div class="chart-wrapper custom">
+        <canvas baseChart [datasets]="barChartData1" [labels]="barChartLabels1" [options]="barChartOptions"
+            [plugins]="barChartPlugins" [colors]="barChartColors1" [legend]="barChartLegend" [chartType]="barChartType">
+        </canvas>
+    </div>
+</div>

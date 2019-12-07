@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { DataService } from "src/app/shared/data.service";
 import { Router } from "@angular/router";
 import { NgForm } from "@angular/forms";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-advertisement-management",
@@ -18,6 +19,17 @@ export class AdvertisementManagementComponent implements OnInit {
   currentPage;
   ngOnInit() {
     this.getAllAds(1);
+  }
+  ShowImg(item) {
+    console.log(item);
+    Swal.fire({
+      title: item.title,
+      imageUrl: item.image,
+      imageWidth: 1000,
+      imageHeight: 450,
+      imageAlt: "Custom image",
+      showConfirmButton: false
+    });
   }
   getAllAds(page) {
     this.currentPage = page;
@@ -63,6 +75,12 @@ export class AdvertisementManagementComponent implements OnInit {
     this._dataService.put(uri, this.formEdit.value).subscribe(
       (data: any) => {
         this.getAllAds(this.currentPage);
+        Swal.fire({
+          icon: "success",
+          title: "Update successful!",
+          showConfirmButton: false,
+          timer: 1500
+        });
       },
       (err: any) => {
         console.log(err);
@@ -75,9 +93,22 @@ export class AdvertisementManagementComponent implements OnInit {
     this._dataService.delete(uri).subscribe(
       (data: any) => {
         this.getAllAds(this.currentPage);
+        Swal.fire({
+          icon: "success",
+          title: "Delete successful!",
+          showConfirmButton: false,
+          timer: 1500
+        });
       },
       (err: any) => {
         console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+          showConfirmButton: false,
+          timer: 1500
+        });
       }
     );
   }
@@ -88,6 +119,12 @@ export class AdvertisementManagementComponent implements OnInit {
       (data: any) => {
         this.getAllAds(this.currentPage);
         this.formSignUp.resetForm();
+        Swal.fire({
+          icon: "success",
+          title: "Add new product successful!",
+          showConfirmButton: false,
+          timer: 1500
+        });
       },
       (err: any) => {
         console.log(err);

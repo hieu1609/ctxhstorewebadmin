@@ -4,6 +4,7 @@ import { HttpHeaders, HttpClient } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { tap, catchError } from "rxjs/operators";
 import { Router } from "@angular/router";
+import Swal from "sweetalert2";
 let urlApi;
 const httpOptions = {
   headers: new HttpHeaders({
@@ -22,6 +23,14 @@ export class DataService {
     switch (errCode.status) {
       case 500:
         console.log(errCode.error);
+        Swal.fire({
+          icon: "error",
+          title: "Opps...",
+          text: "Server Erorr, Please try again later !",
+          showConfirmButton: false,
+          timer: 1500
+        });
+
         break;
       case 404:
         console.log(errCode.error);
@@ -29,6 +38,14 @@ export class DataService {
       case 401:
         console.log(errCode.error.status);
         this.router.navigate(["/admin"]);
+        break;
+      case 403:
+        Swal.fire({
+          icon: "error",
+          title: " Please check your information and Try again!",
+          showConfirmButton: false,
+          timer: 1500
+        });
         break;
       default:
         break;

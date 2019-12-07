@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { DataService } from "src/app/shared/data.service";
 import { Router } from "@angular/router";
 import { NgForm } from "@angular/forms";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-user-management",
@@ -52,10 +53,16 @@ export class UserManagementComponent implements OnInit {
     this._dataService.delete(uri).subscribe(
       (data: any) => {
         this.getAllUsers(this.currentPage);
+        Swal.fire({
+          icon: "success",
+          title: "Delete User Successful",
+          showConfirmButton: false,
+          timer: 1500
+        });
       },
       (err: any) => {
         console.log(err);
-        alert(err.error.errors[0].errorMessage);
+        // alert(err.error.errors[0].errorMessage);
       }
     );
   }
@@ -81,6 +88,12 @@ export class UserManagementComponent implements OnInit {
     this._dataService.put(uri, this.formEdit.value).subscribe(
       (data: any) => {
         this.getAllUsers(this.currentPage);
+        Swal.fire({
+          icon: "success",
+          title: "Update Successful",
+          showConfirmButton: false,
+          timer: 1500
+        });
       },
       (err: any) => {
         console.log(err);
@@ -93,6 +106,12 @@ export class UserManagementComponent implements OnInit {
     this._dataService.post(uri, this.formSignUp.value).subscribe(
       (data: any) => {
         this.getAllUsers(this.currentPage);
+        Swal.fire({
+          icon: "success",
+          title: "Add User Successful",
+          showConfirmButton: false,
+          timer: 1500
+        });
         this.formSignUp.resetForm();
       },
       (err: any) => {

@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { DataService } from "src/app/shared/data.service";
 import { Router } from "@angular/router";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-product-management",
@@ -71,10 +72,16 @@ export class ProductManagementComponent implements OnInit {
     const uri = `admin/product/${item.id}`;
     this._dataService.delete(uri).subscribe(
       (data: any) => {
+        Swal.fire({
+          icon: "success",
+          title: "Delete successful!",
+          showConfirmButton: false,
+          timer: 1500
+        });
         this.getAllProduct(this.currentPage);
       },
       (err: any) => {
-        alert(err.error.errors[0].errorMessage);
+        // alert(err.error.errors[0].errorMessage);
       }
     );
   }
@@ -99,6 +106,12 @@ export class ProductManagementComponent implements OnInit {
     this._dataService.put(uri, this.formEdit.value).subscribe(
       (data: any) => {
         this.getAllProduct(this.currentPage);
+        Swal.fire({
+          icon: "success",
+          title: "Update successful!",
+          showConfirmButton: false,
+          timer: 1500
+        });
       },
       (err: any) => {
         console.log(err);
@@ -110,6 +123,12 @@ export class ProductManagementComponent implements OnInit {
     const uri = "admin/addProduct";
     this._dataService.post(uri, this.formSignUp.value).subscribe(
       (data: any) => {
+        Swal.fire({
+          icon: "success",
+          title: "Add new product successful!",
+          showConfirmButton: false,
+          timer: 1500
+        });
         this.getAllProduct(this.currentPage);
         this.formSignUp.resetForm();
       },
