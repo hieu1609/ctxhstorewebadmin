@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 })
 export class AdvertisementManagementComponent implements OnInit {
   constructor(private _dataService: DataService, private router: Router) {}
-  @ViewChild("formSignUp", { static: false }) formSignUp: NgForm;
+  @ViewChild("formAddAds", { static: false }) formAddAds: NgForm;
   @ViewChild("formEdit", { static: false }) formEdit: NgForm;
   adsList: any = [];
   idAdsEdit;
@@ -21,7 +21,6 @@ export class AdvertisementManagementComponent implements OnInit {
     this.getAllAds(1);
   }
   ShowImg(item) {
-    console.log(item);
     Swal.fire({
       title: item.title,
       imageUrl: item.image,
@@ -43,34 +42,24 @@ export class AdvertisementManagementComponent implements OnInit {
         if (this.adsList.length === 0 && page !== 1) {
           this.getAllAds(page - 1);
         }
-
-        console.log(data.data.numPage);
         let i = 1;
         this.totalPage = [];
         while (i <= data.data.numPage) {
           this.totalPage.push(i);
           i++;
         }
-        console.log(this.totalPage);
       },
-      (err: any) => {
-        console.log(err);
-      }
+      (err: any) => {}
     );
   }
   EditAds(item) {
-    console.log(item);
-
     this.idAdsEdit = item.id;
     this.formEdit.setValue({
       title: item.title,
       image: item.image
     });
-
-    console.log(this.formEdit.value);
   }
   _handleOnSubmitEditForm() {
-    console.log(this.formEdit.value);
     const uri = `admin/slideshow/${this.idAdsEdit}`;
     this._dataService.put(uri, this.formEdit.value).subscribe(
       (data: any) => {
@@ -82,9 +71,7 @@ export class AdvertisementManagementComponent implements OnInit {
           timer: 1500
         });
       },
-      (err: any) => {
-        console.log(err);
-      }
+      (err: any) => {}
     );
   }
   DeleteAds(item) {
@@ -100,35 +87,23 @@ export class AdvertisementManagementComponent implements OnInit {
           timer: 1500
         });
       },
-      (err: any) => {
-        console.log(err);
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "Something went wrong!",
-          showConfirmButton: false,
-          timer: 1500
-        });
-      }
+      (err: any) => {}
     );
   }
   _handleOnSubmitAddForm() {
-    console.log(this.formSignUp.value);
     const uri = "admin/addSlideShow";
-    this._dataService.post(uri, this.formSignUp.value).subscribe(
+    this._dataService.post(uri, this.formAddAds.value).subscribe(
       (data: any) => {
         this.getAllAds(this.currentPage);
-        this.formSignUp.resetForm();
+        this.formAddAds.resetForm();
         Swal.fire({
           icon: "success",
-          title: "Add new product successful!",
+          title: "Add new ads successful!",
           showConfirmButton: false,
           timer: 1500
         });
       },
-      (err: any) => {
-        console.log(err);
-      }
+      (err: any) => {}
     );
   }
 }

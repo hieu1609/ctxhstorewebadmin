@@ -34,18 +34,15 @@ export class UserManagementComponent implements OnInit {
         if (this.userList.length === 0 && page !== 1) {
           this.getAllUsers(page - 1);
         }
-        console.log(data.data.numPage);
+
         let i = 1;
         this.totalPage = [];
         while (i <= data.data.numPage) {
           this.totalPage.push(i);
           i++;
         }
-        console.log(this.totalPage);
       },
-      (err: any) => {
-        console.log(err);
-      }
+      (err: any) => {}
     );
   }
   DeleteUser(item) {
@@ -60,14 +57,10 @@ export class UserManagementComponent implements OnInit {
           timer: 1500
         });
       },
-      (err: any) => {
-        console.log(err);
-        // alert(err.error.errors[0].errorMessage);
-      }
+      (err: any) => {}
     );
   }
   EditUser(item) {
-    console.log(item);
     this.editflag = true;
     this.idUserEdit = item.id;
     this.formEdit.setValue({
@@ -78,12 +71,9 @@ export class UserManagementComponent implements OnInit {
       admin: item.admin
     });
     this.editflag = true;
-    console.log(this.formEdit.value);
   }
-  AddUser() {}
 
   _handleOnSubmitEditForm() {
-    console.log(this.formEdit.value);
     const uri = `admin/${this.idUserEdit}`;
     this._dataService.put(uri, this.formEdit.value).subscribe(
       (data: any) => {
@@ -95,13 +85,10 @@ export class UserManagementComponent implements OnInit {
           timer: 1500
         });
       },
-      (err: any) => {
-        console.log(err);
-      }
+      (err: any) => {}
     );
   }
   _handleOnSubmitAddForm() {
-    console.log(this.formSignUp.value);
     const uri = "admin/addUser";
     this._dataService.post(uri, this.formSignUp.value).subscribe(
       (data: any) => {
@@ -114,9 +101,7 @@ export class UserManagementComponent implements OnInit {
         });
         this.formSignUp.resetForm();
       },
-      (err: any) => {
-        console.log(err);
-      }
+      (err: any) => {}
     );
   }
 }

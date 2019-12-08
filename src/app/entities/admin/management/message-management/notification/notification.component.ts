@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { DataService } from "src/app/shared/data.service";
 import { Router } from "@angular/router";
 import { NgForm } from "@angular/forms";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-notification",
@@ -17,6 +18,7 @@ export class NotificationComponent implements OnInit {
   notificationsListUnread: any = [];
   notificationsListReceived: any = [];
   idFeedbackEdit;
+  usernameRecei;
   flag = false;
   totalPage: any = [];
   currentPage;
@@ -76,6 +78,7 @@ export class NotificationComponent implements OnInit {
       notificationContent: item.content,
       seen: true
     };
+    this.usernameRecei = item.name;
     console.log(objFeedBack);
     this.idFeedbackEdit = item.id;
     console.log(this.formEdit.value);
@@ -102,7 +105,8 @@ export class NotificationComponent implements OnInit {
     this.formEdit.setValue({
       userid: item.user_id_send,
       title: item.title,
-      content: item.content
+      content: item.content,
+      name: item.name
     });
 
     console.log(this.formEdit.value);
@@ -133,6 +137,12 @@ export class NotificationComponent implements OnInit {
     this._dataService.delete(uri).subscribe(
       (data: any) => {
         this.getNotifications(this.currentPage);
+        Swal.fire({
+          icon: "success",
+          title: "Delete successful!",
+          showConfirmButton: false,
+          timer: 1500
+        });
       },
       (err: any) => {
         console.log(err);
@@ -153,6 +163,12 @@ export class NotificationComponent implements OnInit {
       (data: any) => {
         this.getNotifications(this.currentPage);
         this.formAddNew.resetForm();
+        Swal.fire({
+          icon: "success",
+          title: "Send notification successful!",
+          showConfirmButton: false,
+          timer: 1500
+        });
       },
       (err: any) => {
         console.log(err);

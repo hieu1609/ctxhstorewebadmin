@@ -41,7 +41,7 @@
                             <span class="mr-1">ID</span>
 
                         </th>
-                        <th> To: User ID</th>
+                        <th> To: Customer</th>
 
                         <th>Title</th>
                         <th>Content</th>
@@ -58,7 +58,24 @@
                             {{item.id}}
                         </td>
                         <td>
-                            {{item.user_id_receive}}
+                            <div>
+                                {{item.name}}
+                            </div>
+                            <ng-container *ngIf="item.admin; else ElseContentName3">
+                                <div class="typeUser">
+                                    <div class="admin">
+                                        ADMIN
+                                    </div>
+                                </div>
+
+                            </ng-container>
+                            <ng-template #ElseContentName3>
+                                <div class="typeUser">
+                                    <div class="user">
+                                        USER
+                                    </div>
+                                </div>
+                            </ng-template>
                         </td>
                         <td>
                             {{item.title}}
@@ -170,9 +187,12 @@
                 <div class="modal-body">
 
                     <form #formEdit="ngForm">
+                        <span>To <input placeholder="To" type="text" readonly name="name" readonly required
+                                #name="ngModel" ngModel></span>
 
-                        <span>To <input placeholder="To" type="text" name="userid" readonly required #userid="ngModel"
-                                ngModel></span>
+
+                        <span>User ID<input placeholder="To" type="text" name="userid" readonly required
+                                #userid="ngModel" ngModel></span>
 
                         <p class="alert alert-danger mt-2"
                             *ngIf="userid?.errors?.required && (userid.dirty || userid.touched)">

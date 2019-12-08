@@ -7,35 +7,22 @@
                     <h3 class="text-left text-primary font-weight-bold">Advertisement Management </h3>
                 </div>
                 <div class="col-md-6 text-right">
-                    <button class="btn btn-success" id="btnThem" data-toggle="modal" data-target="#myModal"
-                        (click)="AddUser()"><i class="fa fa-plus"></i> Add Ads</button>
+                    <button class="btn btn-success" id="btnThem" data-toggle="modal" data-target="#myModal"><i
+                            class="fa fa-plus"></i> Add Ads</button>
 
                 </div>
             </div>
         </div>
 
         <div class="card-body">
-            <div class="row mb-3">
-                <div class="col">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Tên nhân viên" id="searchName">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="btnTimNV"><i class="fa fa-search"></i></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <table class="table table-bordered table-hover myTable">
                 <thead class="text-primary">
                     <tr>
                         <th class="nowrap">
                             <span class="mr-1">ID</span>
-
                         </th>
                         <th>Name</th>
-
                         <th>Image</th>
-
                         <th><em class="fa fa-cog"></em></th>
                     </tr>
                 </thead>
@@ -51,7 +38,6 @@
                         <td>
                             {{item.title}}
                         </td>
-
                         <img (click)="ShowImg(item)" class="smallImage" [src]="item.image" alt="item.title">
                         <td>
                             <button class="btn btn-info mr-1" data-toggle="modal" (click)="EditAds(item)"
@@ -97,19 +83,19 @@
                 <!-- Modal body -->
                 <div class="modal-body">
 
-                    <form #formSignUp="ngForm">
+                    <form #formAddAds="ngForm">
+                        <span>Link Image <input placeholder="Image" type="text" name="image" required #image="ngModel"
+                                ngModel></span>
 
-
-                        <input placeholder="Image" type="text" name="image" required #image="ngModel" ngModel>
                         <p class="alert alert-danger mt-2"
                             *ngIf="image?.errors?.required && (image.dirty || image.touched)">
-                            Vui lòng nhập link hình ảnh </p>
+                            Image's link is required </p>
 
-
-                        <input placeholder="Title" type="text" #title="ngModel" required name="title" ngModel>
+                        <span>Title <input placeholder="Title" type="text" #title="ngModel" required name="title"
+                                ngModel></span>
                         <p class="alert alert-danger mt-2"
                             *ngIf="title?.errors?.required &&  (title.dirty || title.touched)">
-                            Vui lòng nhập tiêu đè </p>
+                            Title is required </p>
                     </form>
                 </div>
 
@@ -145,18 +131,17 @@
                 <div class="modal-body">
 
                     <form #formEdit="ngForm">
-
-
-                        <input placeholder="Image" type="text" name="image" required #image="ngModel" ngModel>
+                        <span>Link Image <input placeholder="Image" type="text" name="image" required #image="ngModel"
+                                ngModel></span>
                         <p class="alert alert-danger mt-2"
                             *ngIf="image?.errors?.required && (image.dirty || image.touched)">
-                            Vui lòng nhập link hình ảnh </p>
+                            Image's link is required </p>
 
-
-                        <input placeholder="Title" type="text" #title="ngModel" required name="title" ngModel>
+                        <span>Title <input placeholder="Title" type="text" #title="ngModel" required name="title"
+                                ngModel></span>
                         <p class="alert alert-danger mt-2"
                             *ngIf="title?.errors?.required &&  (title.dirty || title.touched)">
-                            Vui lòng nhập tiêu đè </p>
+                            Title is required </p>
                     </form>
 
                 </div>

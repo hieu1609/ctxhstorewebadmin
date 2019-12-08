@@ -26,9 +26,9 @@ export class DataService {
         Swal.fire({
           icon: "error",
           title: "Opps...",
-          text: "Server Erorr, Please try again later !",
+          text: errCode.error.errors[0].errorMessage,
           showConfirmButton: false,
-          timer: 1500
+          timer: 2500
         });
 
         break;
@@ -36,18 +36,50 @@ export class DataService {
         console.log(errCode.error);
         break;
       case 401:
-        console.log(errCode.error.status);
-        this.router.navigate(["/admin"]);
+        if (errCode.error.errors[0].errCode === 2076) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: errCode.error.errors[0].errorMessage,
+            showConfirmButton: false,
+            timer: 2500
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: errCode.error.errors[0].errorMessage,
+            showConfirmButton: false,
+            timer: 2500
+          });
+          this.router.navigate(["/admin"]);
+        }
         break;
       case 403:
         Swal.fire({
           icon: "error",
-          title: " Please check your information and Try again!",
+          title: errCode.error.errors[0].errorMessage,
           showConfirmButton: false,
-          timer: 1500
+          timer: 2500
+        });
+        break;
+      case 422:
+        Swal.fire({
+          icon: "error",
+          title: "Something went wrong ",
+          text: errCode.error.errors[0].errorMessage,
+          showConfirmButton: false,
+          timer: 2500
         });
         break;
       default:
+        Swal.fire({
+          icon: "error",
+          title: "Opps...",
+          text: errCode.error.errors[0].errorMessage,
+          showConfirmButton: false,
+          timer: 2500
+        });
         break;
     }
     return throwError(errCode);

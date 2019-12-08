@@ -316,11 +316,22 @@ li.order {
     overflow: hidden;
     transition: all 1s;
   }
+  .submenuMess {
+    margin-left: 30px;
+    height: 0px;
+    overflow: hidden;
+    transition: all 1s;
+  }
 }
 li.order:hover {
   .submenuOrder {
     margin-left: 30px;
     height: 183px;
+    transition: all 1s;
+  }
+  .submenuMess {
+    margin-left: 30px;
+    height: 90px;
     transition: all 1s;
   }
 }

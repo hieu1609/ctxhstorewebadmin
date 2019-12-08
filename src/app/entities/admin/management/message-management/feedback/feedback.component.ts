@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { DataService } from "src/app/shared/data.service";
 import { Router } from "@angular/router";
 import { NgForm } from "@angular/forms";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-feedback",
@@ -67,6 +68,17 @@ export class FeedbackComponent implements OnInit {
       }
     );
   }
+  Seen(objFeedBack) {
+    const uri = `admin/notification/${this.idFeedbackEdit}`;
+    this._dataService.put(uri, objFeedBack).subscribe(
+      (data: any) => {
+        this.getAllFeedbacks(this.currentPage);
+      },
+      (err: any) => {
+        console.log(err);
+      }
+    );
+  }
   ShowFeedbackDetail(item) {
     this.formDetail.setValue({
       userid: item.user_id_send,
@@ -80,18 +92,9 @@ export class FeedbackComponent implements OnInit {
       notificationContent: item.content,
       seen: true
     };
-    console.log(objFeedBack);
+
     this.idFeedbackEdit = item.id;
-    console.log(this.formDetail.value);
-    const uri = `admin/notification/${this.idFeedbackEdit}`;
-    this._dataService.put(uri, objFeedBack).subscribe(
-      (data: any) => {
-        this.getAllFeedbacks(this.currentPage);
-      },
-      (err: any) => {
-        console.log(err);
-      }
-    );
+    this.Seen(objFeedBack);
   }
   ReplyFeedbacks(item) {
     console.log(item);
@@ -102,7 +105,7 @@ export class FeedbackComponent implements OnInit {
       title: item.title,
       content: null
     });
-
+    this.ShowFeedbackDetail(item);
     console.log(this.formEdit.value);
   }
   SendNotification(item) {
@@ -130,6 +133,12 @@ export class FeedbackComponent implements OnInit {
     this._dataService.post(uri, objReply).subscribe(
       (data: any) => {
         this.getAllFeedbacks(this.currentPage);
+        Swal.fire({
+          icon: "success",
+          title: "Reply feedback successful!",
+          showConfirmButton: false,
+          timer: 1500
+        });
       },
       (err: any) => {
         console.log(err);
@@ -142,6 +151,12 @@ export class FeedbackComponent implements OnInit {
     this._dataService.delete(uri).subscribe(
       (data: any) => {
         this.getAllFeedbacks(this.currentPage);
+        Swal.fire({
+          icon: "success",
+          title: "Delete successful!",
+          showConfirmButton: false,
+          timer: 1500
+        });
       },
       (err: any) => {
         console.log(err);
