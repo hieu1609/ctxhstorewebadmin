@@ -137,7 +137,7 @@
                                 ngModel></span>
 
                         <p class="alert alert-danger mt-2"
-                            *ngIf="image?.errors?.required && (image.dirty || image.touched)">
+                            *ngIf="userid?.errors?.required && (userid.dirty || userid.touched)">
                             Please enter Receiver's ID</p>
 
 
@@ -147,9 +147,9 @@
                             *ngIf="title?.errors?.required &&  (title.dirty || title.touched)">
                             Please Enter Title </p>
                         <span>Content <textarea placeholder="Content" name="content" rows="7" cols="30"
-                                #content="ngModel" required ngModel>Description</textarea>
+                                #content="ngModel" required ngModel>Content</textarea>
                             <p class="alert alert-danger mt-2"
-                                *ngIf="description?.errors?.required && (description.dirty || description.touched)">
+                                *ngIf="content?.errors?.required && (content.dirty || content.touched)">
                                 Vui lòng nhập mô tả sản phẩm </p></span>
                     </form>
 

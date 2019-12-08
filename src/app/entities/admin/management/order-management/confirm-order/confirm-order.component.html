@@ -65,75 +65,6 @@
     </div>
 
 
-    <!-- The Modal -->
-    <div class="modal fade" id="myModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-
-                <header class="head-form mb-0">
-                    <h2>Add Product</h2>
-                </header>
-
-                <!-- Modal Header -->
-                <!-- 	<div class="modal-header">
-                                    <h4 class="modal-title" id="modal-title">Modal Heading</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div> -->
-
-                <!-- Modal body -->
-                <div class="modal-body">
-
-                    <form #formSignUp="ngForm">
-
-
-                        <input placeholder="ProductName" type="text" name="productName" required #productName="ngModel"
-                            ngModel>
-                        <p class="alert alert-danger mt-2"
-                            *ngIf="productName?.errors?.required && (productName.dirty || productName.touched)">
-                            Vui lòng nhập tên sản phẩm </p>
-
-
-                        <input placeholder="Price" type="number" #productPrice="ngModel" required name="productPrice"
-                            ngModel>
-                        <p class="alert alert-danger mt-2"
-                            *ngIf="productPrice?.errors?.required &&  (productPrice.dirty || productPrice.touched)">
-                            Vui lòng nhập giá sản phẩm </p>
-
-                        <input type="text" name="productImage" #productImage="ngModel" required ngModel
-                            placeholder="Image" />
-                        <p class="alert alert-danger mt-2"
-                            *ngIf="productImage?.errors?.required && (productImage.dirty || productImage.touched)">
-                            Vui lòng nhập link hình ảnh </p>
-
-                        <textarea placeholder="Description" name="description" rows="10" cols="30"
-                            #description="ngModel" required ngModel>Description</textarea>
-                        <p class="alert alert-danger mt-2"
-                            *ngIf="description?.errors?.required && (description.dirty || description.touched)">
-                            Vui lòng nhập mô tả sản phẩm </p>
-
-
-                        <select class="form-control" name="categoryId" ngModel>
-                            <option *ngFor="let item of categoriesList" value={{item.id}}>{{item.category_name}}
-                            </option>
-
-                        </select>
-
-
-                    </form>
-
-                </div>
-
-                <!-- Modal footer -->
-                <div class="modal-footer" id="modal-footer">
-                    <button id="btnThemNV" type="submit" (click)="_handleOnSubmitAddForm(formSignUp)"
-                        class="btn btn-success">Add Product</button>
-                    <button id="btnDong" type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
 
     <!-- form edit -->
     <!-- The Modal -->
@@ -211,8 +142,7 @@
                 <!-- Modal footer -->
                 <div class="modal-footer" id="modal-footer">
 
-                    <button type="button" (click)="_handleOnSubmitEditForm(formEdit)"
-                        class="btn btn-success">Update</button>
+                    <button type="button" (click)="_handleOnSubmitEditForm()" class="btn btn-success">Update</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
 

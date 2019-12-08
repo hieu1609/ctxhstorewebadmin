@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { DataService } from "src/app/shared/data.service";
 import { Router } from "@angular/router";
 import { NgForm } from "@angular/forms";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-completed-order",
@@ -96,6 +97,13 @@ export class CompletedOrderComponent implements OnInit {
     this._dataService.delete(uri).subscribe(
       (data: any) => {
         this.getAllOrder(this.currentPage);
+        Swal.fire({
+          icon: "success",
+          title: "Delete successful!",
+
+          showConfirmButton: false,
+          timer: 1500
+        });
       },
       (err: any) => {
         alert(err.error.errors[0].errorMessage);
@@ -124,53 +132,5 @@ export class CompletedOrderComponent implements OnInit {
     this.editOrderObj.orderId = item.order_id;
     this.editOrderObj.productId = item.product_id;
     this.editOrderObj.userId = item.user;
-  }
-
-  _handleOnSubmitEditForm() {
-    console.log(this.formEdit.value);
-    this.editOrderObj.productNumber = this.formEdit.value.productNumber;
-    if (this.formEdit.value.types === 0) {
-      this.editOrderObj.confirm = true;
-      this.editOrderObj.shipping = false;
-      this.editOrderObj.success = false;
-    } else if (this.formEdit.value.types === "1") {
-      this.editOrderObj.confirm = true;
-      this.editOrderObj.shipping = true;
-      this.editOrderObj.success = false;
-    } else {
-      this.editOrderObj.confirm = true;
-      this.editOrderObj.shipping = true;
-      this.editOrderObj.success = true;
-    }
-
-    this.editOrderObj.name = this.formEdit.value.name;
-    this.editOrderObj.phone = this.formEdit.value.phone;
-    this.editOrderObj.address = this.formEdit.value.address;
-    this.editOrderObj.email = this.formEdit.value.email;
-    console.log(this.editOrderObj);
-
-    const uri = `admin/order/editPurchasesAdmin`;
-
-    this._dataService.put(uri, this.editOrderObj).subscribe(
-      (data: any) => {
-        this.getAllOrder(this.currentPage);
-      },
-      (err: any) => {
-        console.log(err);
-      }
-    );
-  }
-  _handleOnSubmitAddForm() {
-    console.log(this.formSignUp.value);
-    const uri = "admin/addProduct";
-    this._dataService.post(uri, this.formSignUp.value).subscribe(
-      (data: any) => {
-        this.getAllOrder(this.currentPage);
-        this.formSignUp.resetForm();
-      },
-      (err: any) => {
-        console.log(err);
-      }
-    );
   }
 }

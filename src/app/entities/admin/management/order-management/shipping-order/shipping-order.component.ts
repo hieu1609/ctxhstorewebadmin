@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { DataService } from "src/app/shared/data.service";
 import { Router } from "@angular/router";
 import { NgForm } from "@angular/forms";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-shipping-order",
@@ -99,10 +100,15 @@ export class ShippingOrderComponent implements OnInit {
     this._dataService.delete(uri).subscribe(
       (data: any) => {
         this.getAllOrder(this.currentPage);
+        Swal.fire({
+          icon: "success",
+          title: "Delete successful!",
+
+          showConfirmButton: false,
+          timer: 1500
+        });
       },
-      (err: any) => {
-        alert(err.error.errors[0].errorMessage);
-      }
+      (err: any) => {}
     );
   }
   EditProduct(item) {
@@ -162,6 +168,13 @@ export class ShippingOrderComponent implements OnInit {
     this._dataService.put(uri, this.editOrderObj).subscribe(
       (data: any) => {
         this.getAllOrder(this.currentPage);
+        Swal.fire({
+          icon: "success",
+          title: "Update successful!",
+
+          showConfirmButton: false,
+          timer: 1500
+        });
       },
       (err: any) => {
         console.log(err);

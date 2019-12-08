@@ -103,15 +103,7 @@ export class NewOrderComponent implements OnInit {
           timer: 1500
         });
       },
-      (err: any) => {
-        Swal.fire({
-          icon: "error",
-          title: "Something wents wrong",
-          text: err.error.errors[0].errorMessage,
-          showConfirmButton: false,
-          timer: 1500
-        });
-      }
+      (err: any) => {}
     );
   }
   EditProduct(item) {
@@ -179,13 +171,6 @@ export class NewOrderComponent implements OnInit {
       },
       (err: any) => {
         console.log(err);
-        Swal.fire({
-          icon: "error",
-          title: "Something wents wrong",
-          text: err.error.errors[0].errorMessage,
-          showConfirmButton: false,
-          timer: 2500
-        });
       }
     );
   }

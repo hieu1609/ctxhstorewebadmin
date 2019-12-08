@@ -1,6 +1,6 @@
 <div class="container mt-5" [ngClass]="{'right-panel-active' : signIn}">
     <div class="form-container sign-in-container">
-        <form #formSignIn="ngForm" (submit)="_handleOnSubmit(formSignIn)">
+        <form #formSignIn="ngForm" (submit)="_handleOnSubmit()">
             <h1>Sign in</h1>
             <div class="social-container">
                 <a href="#" class="social"><i class="fa fa-facebook-f"></i></a>
@@ -28,7 +28,7 @@
         </form>
     </div>
     <div class="form-container sign-up-container">
-        <form #formSignUp="ngForm" (submit)="_handleOnSubmitSignUp(formSignUp)">
+        <form #formSignUp="ngForm" (submit)="_handleOnSubmitSignUp()">
             <h1>Create Account</h1>
             <div class="social-container">
                 <a href="#" class="social"><i class="fa fa-facebook-f"></i></a>
