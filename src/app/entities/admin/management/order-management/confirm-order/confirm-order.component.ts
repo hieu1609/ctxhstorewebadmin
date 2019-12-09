@@ -129,6 +129,10 @@ export class ConfirmOrderComponent implements OnInit {
     this.editOrderObj.orderId = item.order_id;
     this.editOrderObj.productId = item.product_id;
     this.editOrderObj.userId = item.user;
+    this.editOrderObj.name = item.name;
+    this.editOrderObj.phone = item.phone;
+    this.editOrderObj.address = item.address;
+    this.editOrderObj.email = item.email;
   }
 
   _handleOnSubmitEditForm() {
@@ -151,11 +155,8 @@ export class ConfirmOrderComponent implements OnInit {
       this.editOrderObj.success = true;
     }
 
-    this.editOrderObj.name = this.formEdit.value.name;
-    this.editOrderObj.phone = this.formEdit.value.phone;
-    this.editOrderObj.address = this.formEdit.value.address;
-    this.editOrderObj.email = this.formEdit.value.email;
-    console.log(this.editOrderObj);
+    this.editOrderObj.productId = this.formEdit.value.productId;
+    this.editOrderObj.productNumber = this.formEdit.value.productNumber;
 
     const uri = `admin/order/editPurchasesAdmin`;
 

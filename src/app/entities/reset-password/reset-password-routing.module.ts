@@ -5,8 +5,7 @@ import { ResetPasswordComponent } from "./reset-password.component";
 const routes: Routes = [
   {
     path: "",
-    component: ResetPasswordComponent,
-    children: [{ path: "", component: ResetPasswordComponent }]
+    component: ResetPasswordComponent
   }
 ];
 

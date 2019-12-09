@@ -52,7 +52,7 @@ export class DataService {
             showConfirmButton: false,
             timer: 2500
           });
-          this.router.navigate([""]);
+          this.router.navigate(["admin"]);
         }
         break;
       case 403:
